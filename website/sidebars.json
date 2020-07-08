@@ -1,0 +1,12 @@
+{
+  "docs": {
+    "Documentation": [
+      "doc/installation",
+      "doc/the-axios-object",
+      "doc/the-request-config",
+      "doc/cancellation"
+    ],
+    "Api": ["api/axios", "api/cancelToken", "api/create", "api/isCancel"],
+    "Recipes": ["recipes/interceptors"]
+  }
+}
