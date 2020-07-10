@@ -6,7 +6,13 @@
       "doc/the-request-config",
       "doc/cancellation"
     ],
-    "Api": ["api/axios", "api/cancelToken", "api/create", "api/isCancel"],
+    "Api": [
+      "api/axios",
+      "api/cancelToken",
+      "api/create",
+      "api/isCancel",
+      "api/interceptors"
+    ],
     "Recipes": ["recipes/interceptors"]
   }
 }
