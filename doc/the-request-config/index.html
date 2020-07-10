@@ -1,0 +1,232 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>The request config · Axios</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="These are the available config options for making requests. Only the `url` is required. Requests will default to `GET` if `method` is not specified."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="The request config · Axios"/><meta property="og:type" content="website"/><meta property="og:url" content="https://giacomocerquone.github.io/axios-docs/"/><meta property="og:description" content="These are the available config options for making requests. Only the `url` is required. Requests will default to `GET` if `method` is not specified."/><meta property="og:image" content="https://giacomocerquone.github.io/axios-docs/img/undraw_online.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://giacomocerquone.github.io/axios-docs/img/undraw_tweetstorm.svg"/><link rel="shortcut icon" href="/axios-docs/img/favicon.ico"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><script src="/axios-docs/js/scrollSpy.js"></script><link rel="stylesheet" href="/axios-docs/css/main.css"/><script src="/axios-docs/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/axios-docs/"><img class="logo" src="/axios-docs/img/favicon.ico" alt="Axios"/><h2 class="headerTitleWithLogo">Axios</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/axios-docs/doc/installation" target="_self">Doc</a></li><li class="siteNavGroupActive"><a href="/axios-docs/api/axios" target="_self">API</a></li><li class="siteNavGroupActive"><a href="/axios-docs/recipes/interceptors" target="_self">Recipes</a></li><li class=""><a href="https://github.com/" target="_self">GitHub</a></li><li class=""><a target="_self"></a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Documentation</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Documentation</h3><ul class=""><li class="navListItem"><a class="navItem" href="/axios-docs/doc/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/axios-docs/doc/the-axios-object">The axios object</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/axios-docs/doc/the-request-config">The request config</a></li><li class="navListItem"><a class="navItem" href="/axios-docs/doc/cancellation">Cancellation</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Api</h3><ul class=""><li class="navListItem"><a class="navItem" href="/axios-docs/api/axios">axios</a></li><li class="navListItem"><a class="navItem" href="/axios-docs/api/cancelToken">axios.CancelToken</a></li><li class="navListItem"><a class="navItem" href="/axios-docs/api/create">axios.create</a></li><li class="navListItem"><a class="navItem" href="/axios-docs/api/isCancel">axios.isCancel</a></li><li class="navListItem"><a class="navItem" href="/axios-docs/api/interceptors">axios.interceptors</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Recipes</h3><ul class=""><li class="navListItem"><a class="navItem" href="/axios-docs/recipes/interceptors">Interceptors</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docsContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1 id="__docusaurus" class="postHeaderTitle">The request config</h1></header><article><div><span><p>These are the available config options for making requests. Only the <code>url</code> is required. Requests will default to <code>GET</code> if <code>method</code> is not specified.</p>
+<pre><code class="hljs css language-js">{
+  <span class="hljs-comment">// `url` is the server URL that will be used for the request</span>
+  <span class="hljs-attr">url</span>: <span class="hljs-string">'/user'</span>,
+
+  <span class="hljs-comment">// `method` is the request method to be used when making the request</span>
+  <span class="hljs-attr">method</span>: <span class="hljs-string">'get'</span>, <span class="hljs-comment">// default</span>
+
+  <span class="hljs-comment">// `baseURL` will be prepended to `url` unless `url` is absolute.</span>
+  <span class="hljs-comment">// It can be convenient to set `baseURL` for an instance of axios to pass relative URLs</span>
+  <span class="hljs-comment">// to methods of that instance.</span>
+  <span class="hljs-attr">baseURL</span>: <span class="hljs-string">'https://some-domain.com/api/'</span>,
+
+  <span class="hljs-comment">// `transformRequest` allows changes to the request data before it is sent to the server</span>
+  <span class="hljs-comment">// This is only applicable for request methods 'PUT', 'POST', 'PATCH' and 'DELETE'</span>
+  <span class="hljs-comment">// The last function in the array must return a string or an instance of Buffer, ArrayBuffer,</span>
+  <span class="hljs-comment">// FormData or Stream</span>
+  <span class="hljs-comment">// You may modify the headers object.</span>
+  <span class="hljs-attr">transformRequest</span>: [<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">data, headers</span>) </span>{
+    <span class="hljs-comment">// Do whatever you want to transform the data</span>
+
+    <span class="hljs-keyword">return</span> data;
+  }],
+
+  <span class="hljs-comment">// `transformResponse` allows changes to the response data to be made before</span>
+  <span class="hljs-comment">// it is passed to then/catch</span>
+  <span class="hljs-attr">transformResponse</span>: [<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">data</span>) </span>{
+    <span class="hljs-comment">// Do whatever you want to transform the data</span>
+
+    <span class="hljs-keyword">return</span> data;
+  }],
+
+  <span class="hljs-comment">// `headers` are custom headers to be sent</span>
+  <span class="hljs-attr">headers</span>: {<span class="hljs-string">'X-Requested-With'</span>: <span class="hljs-string">'XMLHttpRequest'</span>},
+
+  <span class="hljs-comment">// `params` are the URL parameters to be sent with the request</span>
+  <span class="hljs-comment">// Must be a plain object or a URLSearchParams object</span>
+  <span class="hljs-attr">params</span>: {
+    <span class="hljs-attr">ID</span>: <span class="hljs-number">12345</span>
+  },
+
+  <span class="hljs-comment">// `paramsSerializer` is an optional function in charge of serializing `params`</span>
+  <span class="hljs-comment">// (e.g. https://www.npmjs.com/package/qs, http://api.jquery.com/jquery.param/)</span>
+  <span class="hljs-attr">paramsSerializer</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">params</span>) </span>{
+    <span class="hljs-keyword">return</span> Qs.stringify(params, {<span class="hljs-attr">arrayFormat</span>: <span class="hljs-string">'brackets'</span>})
+  },
+
+  <span class="hljs-comment">// `data` is the data to be sent as the request body</span>
+  <span class="hljs-comment">// Only applicable for request methods 'PUT', 'POST', 'DELETE , and 'PATCH'</span>
+  <span class="hljs-comment">// When no `transformRequest` is set, must be of one of the following types:</span>
+  <span class="hljs-comment">// - string, plain object, ArrayBuffer, ArrayBufferView, URLSearchParams</span>
+  <span class="hljs-comment">// - Browser only: FormData, File, Blob</span>
+  <span class="hljs-comment">// - Node only: Stream, Buffer</span>
+  <span class="hljs-attr">data</span>: {
+    <span class="hljs-attr">firstName</span>: <span class="hljs-string">'Fred'</span>
+  },
+  
+  <span class="hljs-comment">// syntax alternative to send data into the body</span>
+  <span class="hljs-comment">// method post</span>
+  <span class="hljs-comment">// only the value is sent, not the key</span>
+  <span class="hljs-attr">data</span>: <span class="hljs-string">'Country=Brasil&amp;City=Belo Horizonte'</span>,
+
+  <span class="hljs-comment">// `timeout` specifies the number of milliseconds before the request times out.</span>
+  <span class="hljs-comment">// If the request takes longer than `timeout`, the request will be aborted.</span>
+  <span class="hljs-attr">timeout</span>: <span class="hljs-number">1000</span>, <span class="hljs-comment">// default is `0` (no timeout)</span>
+
+  <span class="hljs-comment">// `withCredentials` indicates whether or not cross-site Access-Control requests</span>
+  <span class="hljs-comment">// should be made using credentials</span>
+  <span class="hljs-attr">withCredentials</span>: <span class="hljs-literal">false</span>, <span class="hljs-comment">// default</span>
+
+  <span class="hljs-comment">// `adapter` allows custom handling of requests which makes testing easier.</span>
+  <span class="hljs-comment">// Return a promise and supply a valid response (see lib/adapters/README.md).</span>
+  <span class="hljs-attr">adapter</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">config</span>) </span>{
+    <span class="hljs-comment">/* ... */</span>
+  },
+
+  <span class="hljs-comment">// `auth` indicates that HTTP Basic auth should be used, and supplies credentials.</span>
+  <span class="hljs-comment">// This will set an `Authorization` header, overwriting any existing</span>
+  <span class="hljs-comment">// `Authorization` custom headers you have set using `headers`.</span>
+  <span class="hljs-comment">// Please note that only HTTP Basic auth is configurable through this parameter.</span>
+  <span class="hljs-comment">// For Bearer tokens and such, use `Authorization` custom headers instead.</span>
+  <span class="hljs-attr">auth</span>: {
+    <span class="hljs-attr">username</span>: <span class="hljs-string">'janedoe'</span>,
+    <span class="hljs-attr">password</span>: <span class="hljs-string">'s00pers3cret'</span>
+  },
+
+  <span class="hljs-comment">// `responseType` indicates the type of data that the server will respond with</span>
+  <span class="hljs-comment">// options are: 'arraybuffer', 'document', 'json', 'text', 'stream'</span>
+  <span class="hljs-comment">//   browser only: 'blob'</span>
+  <span class="hljs-attr">responseType</span>: <span class="hljs-string">'json'</span>, <span class="hljs-comment">// default</span>
+
+  <span class="hljs-comment">// `responseEncoding` indicates encoding to use for decoding responses (Node.js only)</span>
+  <span class="hljs-comment">// Note: Ignored for `responseType` of 'stream' or client-side requests</span>
+  <span class="hljs-attr">responseEncoding</span>: <span class="hljs-string">'utf8'</span>, <span class="hljs-comment">// default</span>
+
+  <span class="hljs-comment">// `xsrfCookieName` is the name of the cookie to use as a value for xsrf token</span>
+  <span class="hljs-attr">xsrfCookieName</span>: <span class="hljs-string">'XSRF-TOKEN'</span>, <span class="hljs-comment">// default</span>
+
+  <span class="hljs-comment">// `xsrfHeaderName` is the name of the http header that carries the xsrf token value</span>
+  <span class="hljs-attr">xsrfHeaderName</span>: <span class="hljs-string">'X-XSRF-TOKEN'</span>, <span class="hljs-comment">// default</span>
+
+  <span class="hljs-comment">// `onUploadProgress` allows handling of progress events for uploads</span>
+  <span class="hljs-comment">// browser only</span>
+  <span class="hljs-attr">onUploadProgress</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">progressEvent</span>) </span>{
+    <span class="hljs-comment">// Do whatever you want with the native progress event</span>
+  },
+
+  <span class="hljs-comment">// `onDownloadProgress` allows handling of progress events for downloads</span>
+  <span class="hljs-comment">// browser only</span>
+  <span class="hljs-attr">onDownloadProgress</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">progressEvent</span>) </span>{
+    <span class="hljs-comment">// Do whatever you want with the native progress event</span>
+  },
+
+  <span class="hljs-comment">// `maxContentLength` defines the max size of the http response content in bytes allowed in node.js</span>
+  <span class="hljs-attr">maxContentLength</span>: <span class="hljs-number">2000</span>,
+
+  <span class="hljs-comment">// `maxBodyLength` (Node only option) defines the max size of the http request content in bytes allowed</span>
+  <span class="hljs-attr">maxBodyLength</span>: <span class="hljs-number">2000</span>,
+
+  <span class="hljs-comment">// `validateStatus` defines whether to resolve or reject the promise for a given</span>
+  <span class="hljs-comment">// HTTP response status code. If `validateStatus` returns `true` (or is set to `null`</span>
+  <span class="hljs-comment">// or `undefined`), the promise will be resolved; otherwise, the promise will be</span>
+  <span class="hljs-comment">// rejected.</span>
+  <span class="hljs-attr">validateStatus</span>: <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">status</span>) </span>{
+    <span class="hljs-keyword">return</span> status &gt;= <span class="hljs-number">200</span> &amp;&amp; status &lt; <span class="hljs-number">300</span>; <span class="hljs-comment">// default</span>
+  },
+
+  <span class="hljs-comment">// `maxRedirects` defines the maximum number of redirects to follow in node.js.</span>
+  <span class="hljs-comment">// If set to 0, no redirects will be followed.</span>
+  <span class="hljs-attr">maxRedirects</span>: <span class="hljs-number">5</span>, <span class="hljs-comment">// default</span>
+
+  <span class="hljs-comment">// `socketPath` defines a UNIX Socket to be used in node.js.</span>
+  <span class="hljs-comment">// e.g. '/var/run/docker.sock' to send requests to the docker daemon.</span>
+  <span class="hljs-comment">// Only either `socketPath` or `proxy` can be specified.</span>
+  <span class="hljs-comment">// If both are specified, `socketPath` is used.</span>
+  <span class="hljs-attr">socketPath</span>: <span class="hljs-literal">null</span>, <span class="hljs-comment">// default</span>
+
+  <span class="hljs-comment">// `httpAgent` and `httpsAgent` define a custom agent to be used when performing http</span>
+  <span class="hljs-comment">// and https requests, respectively, in node.js. This allows options to be added like</span>
+  <span class="hljs-comment">// `keepAlive` that are not enabled by default.</span>
+  <span class="hljs-attr">httpAgent</span>: <span class="hljs-keyword">new</span> http.Agent({ <span class="hljs-attr">keepAlive</span>: <span class="hljs-literal">true</span> }),
+  <span class="hljs-attr">httpsAgent</span>: <span class="hljs-keyword">new</span> https.Agent({ <span class="hljs-attr">keepAlive</span>: <span class="hljs-literal">true</span> }),
+
+  <span class="hljs-comment">// `proxy` defines the hostname and port of the proxy server.</span>
+  <span class="hljs-comment">// You can also define your proxy using the conventional `http_proxy` and</span>
+  <span class="hljs-comment">// `https_proxy` environment variables. If you are using environment variables</span>
+  <span class="hljs-comment">// for your proxy configuration, you can also define a `no_proxy` environment</span>
+  <span class="hljs-comment">// variable as a comma-separated list of domains that should not be proxied.</span>
+  <span class="hljs-comment">// Use `false` to disable proxies, ignoring environment variables.</span>
+  <span class="hljs-comment">// `auth` indicates that HTTP Basic auth should be used to connect to the proxy, and</span>
+  <span class="hljs-comment">// supplies credentials.</span>
+  <span class="hljs-comment">// This will set an `Proxy-Authorization` header, overwriting any existing</span>
+  <span class="hljs-comment">// `Proxy-Authorization` custom headers you have set using `headers`.</span>
+  <span class="hljs-attr">proxy</span>: {
+    <span class="hljs-attr">host</span>: <span class="hljs-string">'127.0.0.1'</span>,
+    <span class="hljs-attr">port</span>: <span class="hljs-number">9000</span>,
+    <span class="hljs-attr">auth</span>: {
+      <span class="hljs-attr">username</span>: <span class="hljs-string">'mikeymike'</span>,
+      <span class="hljs-attr">password</span>: <span class="hljs-string">'rapunz3l'</span>
+    }
+  },
+
+  <span class="hljs-comment">// `cancelToken` specifies a cancel token that can be used to cancel the request</span>
+  <span class="hljs-comment">// (see Cancellation section below for details)</span>
+  <span class="hljs-attr">cancelToken</span>: <span class="hljs-keyword">new</span> CancelToken(<span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">cancel</span>) </span>{
+  }),
+
+  <span class="hljs-comment">// `decompress` indicates whether or not the response body should be decompressed </span>
+  <span class="hljs-comment">// automatically. If set to `true` will also remove the 'content-encoding' header </span>
+  <span class="hljs-comment">// from the responses objects of all decompressed responses</span>
+  <span class="hljs-comment">// - Node only (XHR cannot turn off decompression)</span>
+  <span class="hljs-attr">decompress</span>: <span class="hljs-literal">true</span> <span class="hljs-comment">// default</span>
+
+}
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/axios-docs/doc/the-axios-object"><span class="arrow-prev">← </span><span>The axios object</span></a><a class="docs-next button" href="/axios-docs/doc/cancellation"><span>Cancellation</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><footer class="nav-footer" id="footer"><section class="sitemap"><a href="/axios-docs/" class="nav-home"><img src="/axios-docs/img/favicon.ico" alt="Axios" width="66" height="58"/></a><div><h5>Docs</h5><a href="/axios-docs/en/doc1.html">Getting Started (or other categories)</a><a href="/axios-docs/en/doc2.html">Guides (or other categories)</a><a href="/axios-docs/en/doc3.html">API Reference (or other categories)</a></div><div><h5>Community</h5><a href="/axios-docs/en/users.html">User Showcase</a><a href="https://stackoverflow.com/questions/tagged/" target="_blank" rel="noreferrer noopener">Stack Overflow</a><a href="https://discordapp.com/">Project Chat</a><a href="https://twitter.com/" target="_blank" rel="noreferrer noopener">Twitter</a></div><div><h5>More</h5><a href="/axios-docs/blog">Blog</a><a href="https://github.com/">GitHub</a><a class="github-button" data-icon="octicon-star" data-count-href="/facebook/docusaurus/stargazers" data-show-count="true" data-count-aria-label="# stargazers on GitHub" aria-label="Star this project on GitHub">Star</a></div></section><a href="https://opensource.facebook.com/" target="_blank" rel="noreferrer noopener" class="fbOpenSource"><img src="/axios-docs/img/oss_logo.png" alt="Facebook Open Source" width="170" height="45"/></a><section class="copyright">Copyright © 2020 Your Name or Your Company Name</section></footer></div></body></html>
